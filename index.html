@@ -7,96 +7,645 @@
 <link href="https://fonts.googleapis.com/css2?family=DSEG7+Classic&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+<style>
+/* CSS UTAMA UNTUK RESPONSIVE DESIGN */
+
+/* Reset dan base styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #FF7A00;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Container utama */
+.main-container {
+    background: rgba(0, 0, 0, 0.184);
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+}
+
+/* HEADER STYLES */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 0 20px;
+    background: transparent;
+}
+
+.header-inner {
+    background: #2C2C2BE5;
+    border-radius: 0 0 30px 30px;
+    padding: 15px 40px;
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+.info-masjid {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.info-masjid h2 {
+    margin: 0;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.info-masjid small {
+    color: white;
+    font-size: 15px;
+}
+
+.info-masjid i {
+    font-size: 50px;
+    color: white;
+    margin: 6px;
+}
+
+.jam-container {
+    text-align: right;
+}
+
+.jam-wrapper {
+    display: inline-block;
+    text-align: center;
+}
+
+#jam {
+    margin-top: 5px;
+    font-family: 'DSEG7 Classic', monospace;
+    font-size: 36px;
+    color: #FF7A00;
+    border: 1px solid #FF7A00;
+    padding: 6px 14px;
+    border-radius: 10px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+#tanggal {
+    margin-top: 6px;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+#hijri {
+    margin-top: 4px;
+    font-size: 15px;
+    color: white;
+    font-style: italic;
+}
+
+/* COUNTDOWN STYLES */
+.countdown-container {
+    position: fixed;
+    bottom: 200px;
+    left: 0;
+    right: 0;
+    z-index: 998;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.countdown-ramadhan {
+    background: #2C2C2BE6;
+    color: white;
+    padding: 8px 15px 8px 10px;
+    font-size: 14px;
+    border-radius: 0 12px 12px 0;
+    max-width: 45%;
+    backdrop-filter: blur(5px);
+}
+
+.countdown-sholat {
+    background: #FF7A00;
+    color: white;
+    padding: 8px 10px 8px 15px;
+    font-size: 14px;
+    border-radius: 12px 0 0 12px;
+    max-width: 45%;
+    border-right: 3px solid #FF7A00;
+    backdrop-filter: blur(5px);
+    text-align: right;
+}
+
+#ramadhan {
+    font-weight: bold;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+#countSholat {
+    font-family: 'DSEG7 Classic', monospace;
+    font-size: 18px;
+    color: white;
+    white-space: nowrap;
+}
+
+/* JADWAL SHOLAT GRID */
+.jadwal-container {
+    position: fixed;
+    bottom: 50px;
+    left: 12px;
+    right: 12px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    z-index: 998;
+}
+
+.jadwal-item {
+    background: #2C2C2B;
+    padding: 20px;
+    text-align: center;
+    border-radius: 6px;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.jadwal-item:first-child {
+    border-radius: 25px 6px 6px 25px;
+}
+
+.jadwal-item:last-child {
+    border-radius: 6px 25px 25px 6px;
+}
+
+.jadwal-title {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.jadwal-time {
+    font-family: 'DSEG7 Classic', monospace;
+    font-size: 36px;
+    color: #FF7A00;
+    border: 1px solid #FF7A00;
+    padding: 6px 12px;
+    display: inline-block;
+    border-radius: 10px;
+    letter-spacing: 2px;
+    margin-top: 10px;
+}
+
+/* MARQUEE */
+marquee {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    background: #6060609E;
+    color: white;
+    z-index: 999;
+}
+
+/* ========== MEDIA QUERIES UNTUK RESPONSIVE ========== */
+
+/* Tablet (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+    .header-inner {
+        padding: 12px 30px;
+        border-radius: 0 0 25px 25px;
+    }
+    
+    .info-masjid h2 {
+        font-size: 32px;
+    }
+    
+    .info-masjid small {
+        font-size: 14px;
+    }
+    
+    .info-masjid i {
+        font-size: 40px;
+    }
+    
+    #jam {
+        font-size: 30px;
+        padding: 5px 12px;
+    }
+    
+    #tanggal {
+        font-size: 18px;
+    }
+    
+    #hijri {
+        font-size: 14px;
+    }
+    
+    .countdown-container {
+        bottom: 180px;
+    }
+    
+    .jadwal-container {
+        grid-template-columns: repeat(3, 1fr);
+        bottom: 60px;
+        left: 15px;
+        right: 15px;
+        gap: 12px;
+    }
+    
+    .jadwal-item {
+        padding: 18px 15px;
+    }
+    
+    .jadwal-title {
+        font-size: 18px;
+    }
+    
+    .jadwal-time {
+        font-size: 30px;
+        padding: 5px 10px;
+    }
+}
+
+/* Smartphone Landscape (576px - 768px) */
+@media screen and (max-width: 768px) {
+    .header-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 15px 25px;
+        border-radius: 0 0 20px 20px;
+    }
+    
+    .info-masjid {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .info-masjid h2 {
+        font-size: 28px;
+    }
+    
+    .info-masjid small {
+        font-size: 13px;
+    }
+    
+    .info-masjid i {
+        font-size: 35px;
+    }
+    
+    .jam-container {
+        text-align: center;
+        width: 100%;
+    }
+    
+    #jam {
+        font-size: 26px;
+        padding: 5px 10px;
+    }
+    
+    #tanggal {
+        font-size: 16px;
+    }
+    
+    #hijri {
+        font-size: 13px;
+    }
+    
+    .countdown-container {
+        bottom: 160px;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .countdown-ramadhan,
+    .countdown-sholat {
+        max-width: 90%;
+        width: 90%;
+        border-radius: 12px;
+        padding: 10px 20px;
+        text-align: center;
+    }
+    
+    .countdown-ramadhan {
+        border-radius: 12px;
+    }
+    
+    .countdown-sholat {
+        border-radius: 12px;
+        text-align: center;
+    }
+    
+    #ramadhan {
+        white-space: normal;
+        font-size: 15px;
+    }
+    
+    #countSholat {
+        white-space: normal;
+        font-size: 16px;
+    }
+    
+    .jadwal-container {
+        grid-template-columns: repeat(2, 1fr);
+        bottom: 70px;
+        left: 10px;
+        right: 10px;
+        gap: 8px;
+    }
+    
+    .jadwal-item {
+        padding: 15px 10px;
+        border-radius: 10px !important;
+    }
+    
+    .jadwal-title {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+    
+    .jadwal-time {
+        font-size: 26px;
+        padding: 4px 8px;
+        margin-top: 5px;
+    }
+    
+    marquee {
+        font-size: 14px;
+        padding: 8px 0;
+    }
+}
+
+/* Smartphone Portrait (max-width: 576px) */
+@media screen and (max-width: 576px) {
+    .header-inner {
+        padding: 12px 20px;
+        border-radius: 0 0 15px 15px;
+    }
+    
+    .info-masjid h2 {
+        font-size: 22px;
+    }
+    
+    .info-masjid small {
+        font-size: 11px;
+    }
+    
+    .info-masjid i {
+        font-size: 30px;
+    }
+    
+    #jam {
+        font-size: 22px;
+        padding: 4px 8px;
+    }
+    
+    #tanggal {
+        font-size: 14px;
+    }
+    
+    #hijri {
+        font-size: 12px;
+    }
+    
+    .countdown-container {
+        bottom: 150px;
+        padding: 0 15px;
+    }
+    
+    .countdown-ramadhan,
+    .countdown-sholat {
+        width: 100%;
+        max-width: 100%;
+        padding: 8px 15px;
+    }
+    
+    #ramadhan {
+        font-size: 14px;
+    }
+    
+    #countSholat {
+        font-size: 14px;
+    }
+    
+    .jadwal-container {
+        grid-template-columns: repeat(2, 1fr);
+        bottom: 65px;
+        left: 8px;
+        right: 8px;
+        gap: 6px;
+    }
+    
+    .jadwal-item {
+        padding: 12px 8px;
+    }
+    
+    .jadwal-title {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+    
+    .jadwal-time {
+        font-size: 22px;
+        padding: 3px 6px;
+        margin-top: 3px;
+        letter-spacing: 1px;
+    }
+    
+    marquee {
+        font-size: 12px;
+        padding: 6px 0;
+    }
+}
+
+/* Very small devices (max-width: 400px) */
+@media screen and (max-width: 400px) {
+    .jadwal-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+        bottom: 60px;
+        left: 5px;
+        right: 5px;
+    }
+    
+    .jadwal-item {
+        padding: 10px 6px;
+    }
+    
+    .jadwal-title {
+        font-size: 13px;
+    }
+    
+    .jadwal-time {
+        font-size: 20px;
+        padding: 2px 4px;
+    }
+    
+    .countdown-container {
+        bottom: 300px;
+    }
+    
+    #jam {
+        font-size: 20px;
+    }
+    
+    #tanggal {
+        font-size: 13px;
+    }
+}
+
+/* Landscape mode untuk mobile */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .countdown-container {
+        bottom: 120px;
+    }
+    
+    .jadwal-container {
+        bottom: 45px;
+    }
+    
+    .jadwal-item {
+        padding: 10px 8px;
+    }
+    
+    .jadwal-time {
+        font-size: 20px;
+    }
+}
+
+/* Untuk layar yang sangat pendek */
+@media screen and (max-height: 500px) {
+    .countdown-container {
+        bottom: 100px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .countdown-ramadhan,
+    .countdown-sholat {
+        width: 48%;
+        max-width: 48%;
+        padding: 6px 10px;
+    }
+    
+    .jadwal-container {
+        bottom: 40px;
+    }
+    
+    .jadwal-item {
+        padding: 8px 5px;
+    }
+    
+    .jadwal-title {
+        font-size: 12px;
+    }
+    
+    .jadwal-time {
+        font-size: 18px;
+    }
+}
+
+/* Animasi highlight untuk sholat berikutnya */
+.highlight-prayer {
+    border: 2px solid #FF7A00 !important;
+    box-shadow: 0 0 15px rgba(255, 122, 0, 0.5) !important;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+</style>
+
 </head>
 
-<body style="margin:0; font-family:Arial, sans-serif; color:#FF7A00; background-size:cover; background-position:center;">
-    <div style="background:rgba(0, 0, 0, 0.184);min-height:100vh;padding:20px">
+<body style="background-image:url('mekkah1.jpg');">
+    <div class="main-container">
 
     <!-- HEADER -->
-    <nav style="position:fixed; top:0; left:0; right:0; z-index:1000; padding:0 20px; background:transparent;">
+    <nav>
+        <div class="header-inner">
+            <!-- info masjid (KIRI) -->
+            <div class="info-masjid">
+                <i class="fa-solid fa-mosque"></i>
+                <div>
+                    <h2>Mesjid Al - Barkah</h2>
+                    <small>Jalan Pahlwan, Kampung Tengah, Belakang Polsek Cileungsi.</small>
+                </div>
+            </div>
 
-    <!-- INNER HEADER -->
-    <div style="background:#2C2C2BE5; border-radius:0 0 30px 30px; padding:15px 40px; max-width:1400px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; box-shadow:0 4px 10px rgba(0,0,0,0.6);">
-
-      <!-- info masjid (KIRI) -->
-      <div style="display:flex; align-items:center; gap:14px;">
-          <i class="fa-solid fa-mosque" style="font-size:50px; color:white; margin: 6px;"></i>
-          <div>
-              <h2 style="margin:0; color:white; font-size:40px; font-weight:bold;">
-                  Mesjid Al - Barkah
-              </h2>
-              <small style="color:white; font-size:15px;">
-                  Jalan Pahlwan, Kampung Tengah, Belakang Polsek Cileungsi.
-              </small>
-          </div>
-      </div>
-
-      <!-- JAM (KANAN) -->
-      <div style="text-align:right;">
-          <div style="display:inline-block; text-align:center;">
-              <div id="jam" style="margin-top:5px; font-family:'DSEG7 Classic', monospace; font-size:36px; color:#FF7A00; border:1px solid #FF7A00; padding:6px 14px; border-radius:10px; letter-spacing:2px; font-weight:bold;"></div>
-              <div id="tanggal" style="margin-top:6px; font-size:20px; color:white; font-weight: bold;"></div>
-              <div id="hijri" style="margin-top:4px; font-size:15px; color:white; font-style: italic;">
-                  <span id="tanggal-hijriyah"></span>
-              </div>
-          </div>
-      </div>
-
-    </div>
-
-</nav>
+            <!-- JAM (KANAN) -->
+            <div class="jam-container">
+                <div class="jam-wrapper">
+                    <div id="jam"></div>
+                    <div id="tanggal"></div>
+                    <div id="hijri">
+                        <span id="tanggal-hijriyah"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <!-- COUNTDOWN KIRI-KANAN SIMPEL -->
-    <div style="position:fixed; bottom:200px; left:0; right:0; z-index:998; display:flex; justify-content:space-between; pointer-events:none;">
-        
+    <div class="countdown-container">
         <!-- KIRI: RAMADHAN -->
-        <div style="background:#2C2C2BE6; color:white; padding:8px 15px 8px 10px; font-size:14px; border-radius:0 12px 12px 0; max-width:45%; backdrop-filter:blur(5px);">
-            <div id="ramadhan" style="font-weight:bold; font-size:16px; white-space:nowrap;">
-            </div>
+        <div class="countdown-ramadhan">
+            <div id="ramadhan"></div>
         </div>
         
         <!-- KANAN: SHOLAT -->
-        <div style="background:#FF7A00; color:white; padding:8px 10px 8px 15px; font-size:14px; border-radius:12px 0 0 12px; max-width:45%; border-right:3px solid #FF7A00; backdrop-filter:blur(5px); text-align:right;">
-            <div id="countSholat" style="font-family:'DSEG7 Classic', monospace; font-size:18px; color:white; white-space:nowrap;">
-            </div>
+        <div class="countdown-sholat">
+            <div id="countSholat"></div>
         </div>
-        
     </div>
 
-    <!-- JADWAL SHOLAT (FIXED DI BAWAH, DI ATAS MARQUEE) -->
-    <div style="position:fixed; bottom:50px; left:12px; right:12px; display:grid; grid-template-columns:repeat(6,1fr); gap:10px; z-index:998;">
-
-      <div style="background:#2C2C2B;padding:20px;text-align:center;border-radius:25px 6px 6px 25px;color:white;">
-        <strong style="font-size:20px;">Subuh</strong><br>
-        <strong id="subuh" style="margin-top:10px;font-family:'DSEG7 Classic', monospace;font-size:36px;color:#FF7A00;border:1px solid #FF7A00;padding:6px 12px;display:inline-block; border-radius:10px;letter-spacing:2px;">--:--</strong>
-      </div>
-      <div style="background:#2C2C2B;padding:20px;text-align:center;border-radius:6px;color:white;">
-        <strong style="font-size:20px;">Syuruk</strong><br>
-        <strong id="syuruq" style="margin-top:10px;font-family:'DSEG7 Classic', monospace;font-size:36px;color:#FF7A00;border:1px solid #FF7A00;padding:6px 12px;display:inline-block;border-radius:10px;letter-spacing:2px;">--:--</strong>
-      </div>
-      <div style="background:#2C2C2B;padding:20px;text-align:center;border-radius:6px;color:white;">
-        <strong style="font-size:20px;">Dzuhur</strong><br>
-        <strong id="dzuhur" style="margin-top:10px;font-family:'DSEG7 Classic', monospace;font-size:36px;color:#FF7A00;border:1px solid #FF7A00;padding:6px 12px;display:inline-block;border-radius:10px;letter-spacing:2px;">--:--</strong>
-      </div>
-      <div style="background:#2C2C2B;padding:20px;text-align:center;border-radius:6px;color:white;">
-        <strong style="font-size:20px;">Ashar</strong><br>
-        <strong id="asar" style="margin-top:10px;font-family:'DSEG7 Classic', monospace;font-size:36px;color:#FF7A00;border:1px solid #FF7A00;padding:6px 12px;display:inline-block;border-radius:10px;letter-spacing:2px;">--:--</strong>
-      </div>
-      <div style="background:#2C2C2B;padding:20px;text-align:center;border-radius:6px;color:white;">
-        <strong style="font-size:20px;">Maghrib</strong><br>
-        <strong id="maghrib" style="margin-top:10px;font-family:'DSEG7 Classic', monospace;font-size:36px;color:#FF7A00;border:1px solid #FF7A00;padding:6px 12px;display:inline-block;border-radius:10px;letter-spacing:2px;">--:--</strong>
-      </div>
-      <div style="background:#2C2C2B;padding:20px;text-align:center;border-radius:6px 25px 25px 6px;color:white;">
-        <strong style="font-size:20px;">Isya</strong><br>
-        <strong id="isya" style="margin-top:10px;font-family:'DSEG7 Classic', monospace;font-size:36px;color:#FF7A00;border:1px solid #FF7A00;padding:6px 12px;display:inline-block;border-radius:10px;letter-spacing:2px;">--:--</strong>
-      </div>
-
+    <!-- JADWAL SHOLAT -->
+    <div class="jadwal-container">
+        <div class="jadwal-item">
+            <strong class="jadwal-title">Subuh</strong>
+            <strong id="subuh" class="jadwal-time">--:--</strong>
+        </div>
+        <div class="jadwal-item">
+            <strong class="jadwal-title">Syuruk</strong>
+            <strong id="syuruq" class="jadwal-time">--:--</strong>
+        </div>
+        <div class="jadwal-item">
+            <strong class="jadwal-title">Dzuhur</strong>
+            <strong id="dzuhur" class="jadwal-time">--:--</strong>
+        </div>
+        <div class="jadwal-item">
+            <strong class="jadwal-title">Ashar</strong>
+            <strong id="asar" class="jadwal-time">--:--</strong>
+        </div>
+        <div class="jadwal-item">
+            <strong class="jadwal-title">Maghrib</strong>
+            <strong id="maghrib" class="jadwal-time">--:--</strong>
+        </div>
+        <div class="jadwal-item">
+            <strong class="jadwal-title">Isya</strong>
+            <strong id="isya" class="jadwal-time">--:--</strong>
+        </div>
     </div>
-
 
     <!-- teks berjalan -->
-    <marquee style="position:fixed; bottom:0; left:0; width:100%; padding:10px 0; font-size:16px; font-weight:bold; background:#6060609E; color:white; z-index:999;">
-      Jadwal kajian Senin: Ust. Fikri – Persiapan Menuju Bulan Suci Ramadhan
+    <marquee>
+        Jadwal kajian Senin: Ust. Fikri - Persiapan Menuju Bulan Suci Ramadhan
     </marquee>
     </div>
 
