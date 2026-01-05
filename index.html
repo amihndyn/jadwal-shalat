@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jadwal Sholat Masjid Aisyah</title>
+<link href="https://fonts.googleapis.com/css2?family=DSEG7+Classic&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body style="margin:0; font-family:Arial, sans-serif; color:#FF7A00; background-size:cover; background-position:center; overflow: hidden;">
+    <div style="background:rgba(0, 0, 0, 0.184);min-height:100vh;padding:20px">
+
+    <!-- HEADER -->
+    <nav style="position:fixed; top:0; left:0; right:0; z-index:1000; ">
+
+    <!-- INNER HEADER -->
+    <div style="background:#2C2C2BE5; border-radius:0 0 30px 30px; padding:15px 20px; max-width:100%; display:flex; justify-content:space-between; align-items:center; box-shadow:0 4px 10px rgba(0,0,0,0.6);">
+
+      <!-- info masjid (KIRI) -->
+      <div style="display:flex; align-items:center; gap:14px;">
+          <i class="fa-solid fa-mosque" style="font-size:50px; color:white; margin: 6px;"></i>
+          <div>
+              <h2 style="margin:0; color:white; font-size:40px; font-weight:bold;">
+                  Mesjid Al - Barkah
+              </h2>
+              <small style="color:white; font-size:15px;">
+                  Jalan Pahlwan, Kampung Tengah, Belakang Polsek Cileungsi.
+              </small>
+          </div>
+      </div>
+
+      <!-- JAM (KANAN) -->
+      <div style="text-align:right;">
+          <div style="display:inline-block; text-align:center;">
+              <div id="jam" style="margin-top:5px; font-family:'DSEG7 Classic', monospace; font-size:36px; color:#FF7A00; border:1px solid #FF7A00; padding:6px 14px; border-radius:10px; letter-spacing:2px; font-weight:bold;"></div>
+              <div id="tanggal" style="margin-top:6px; font-size:20px; color:white; font-weight: bold;"></div>
+              <div id="hijri" style="margin-top:4px; font-size:15px; color:white; font-style: italic;">
+                  <span id="tanggal-hijriyah"></span>
+              </div>
+          </div>
+      </div>
+
+    </div>
+    </div>
+    </nav>
+
+    <!-- COUNTDOWN KIRI-KANAN SIMPEL -->
+    <div style="position:fixed; bottom:200px; left:0; right:0; z-index:998; display:flex; justify-content:space-between; pointer-events:none;">
+        
+        <!-- KIRI: RAMADHAN -->
+        <div style="background:#2C2C2BE6; color:white; padding:8px 15px 8px 10px; font-size:14px; border-radius:0 12px 12px 0; max-width:45%; backdrop-filter:blur(5px);">
+            <div id="ramadhan" style="font-weight:bold; font-size:16px; white-space:nowrap;">
+            </div>
+        </div>
+        
+        <!-- KANAN: SHOLAT -->
+        <div style="background:#FF7A00; color:white; padding:8px 10px 8px 15px; font-size:14px; border-radius:12px 0 0 12px; max-width:45%; border-right:3px solid #FF7A00; backdrop-filter:blur(5px); text-align:right;">
+            <div id="countSholat" style="font-family:'DSEG7 Classic', monospace; font-size:18px; color:white; white-space:nowrap;">
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- JADWAL SHOLAT (FIXED DI BAWAH, DI ATAS MARQUEE) -->
+    <div style="position:fixed; bottom:50px; left:12px; right:12px; display:grid; grid-template-columns:repeat(6,1fr); gap:10px; z-index:998;">
+
+      <div style="background:#2C2C2B;padding:20px;text-align:center;border-radius:25px 6px 6px 25px;color:white;">
+        <strong style="font-size:20px;">Subuh</strong><br>
+        <strong id="subuh" style="margin-top:10px;font-family:'DSEG7 Classic', monospace;font-size:36px;color:#FF7A00;border:1px solid #FF7A00;padding:6px 12px;display:inline-block; border-radius:10px;letter-spacing:2px;">--:--</strong>
+      </div>
+      <div style="background:#2C2C2B;padding:20px;text-align:center;border-radius:6px;color:white;">
+        <strong style="font-size:20px;">Syuruk</strong><br>
+        <strong id="syuruq" style="margin-top:10px;font-family:'DSEG7 Classic', monospace;font-size:36px;color:#FF7A00;border:1px solid #FF7A00;padding:6px 12px;display:inline-block;border-radius:10px;letter-spacing:2px;">--:--</strong>
+      </div>
+      <div style="background:#2C2C2B;padding:20px;text-align:center;border-radius:6px;color:white;">
+        <strong style="font-size:20px;">Dzuhur</strong><br>
+        <strong id="dzuhur" style="margin-top:10px;font-family:'DSEG7 Classic', monospace;font-size:36px;color:#FF7A00;border:1px solid #FF7A00;padding:6px 12px;display:inline-block;border-radius:10px;letter-spacing:2px;">--:--</strong>
+      </div>
+      <div style="background:#2C2C2B;padding:20px;text-align:center;border-radius:6px;color:white;">
+        <strong style="font-size:20px;">Ashar</strong><br>
+        <strong id="asar" style="margin-top:10px;font-family:'DSEG7 Classic', monospace;font-size:36px;color:#FF7A00;border:1px solid #FF7A00;padding:6px 12px;display:inline-block;border-radius:10px;letter-spacing:2px;">--:--</strong>
+      </div>
+      <div style="background:#2C2C2B;padding:20px;text-align:center;border-radius:6px;color:white;">
+        <strong style="font-size:20px;">Maghrib</strong><br>
+        <strong id="maghrib" style="margin-top:10px;font-family:'DSEG7 Classic', monospace;font-size:36px;color:#FF7A00;border:1px solid #FF7A00;padding:6px 12px;display:inline-block;border-radius:10px;letter-spacing:2px;">--:--</strong>
+      </div>
+      <div style="background:#2C2C2B;padding:20px;text-align:center;border-radius:6px 25px 25px 6px;color:white;">
+        <strong style="font-size:20px;">Isya</strong><br>
+        <strong id="isya" style="margin-top:10px;font-family:'DSEG7 Classic', monospace;font-size:36px;color:#FF7A00;border:1px solid #FF7A00;padding:6px 12px;display:inline-block;border-radius:10px;letter-spacing:2px;">--:--</strong>
+      </div>
+
+    </div>
+
+
+    <!-- teks berjalan -->
+    <marquee style="position:fixed; bottom:0; left:0; width:100%; padding:10px 0; font-size:16px; font-weight:bold; background:#6060609E; color:white; z-index:999;">
+      Jadwal kajian Senin: Ust. Fikri – Persiapan Menuju Bulan Suci Ramadhan
+    </marquee>
+    </div>
+
+<script>
+// ==================== KONFIGURASI ====================
+const CONFIG = {
+    LOCATION_ID: 1206, // ID Kabupaten Bogor untuk Jonggol
+    RAMADHAN_DATE: '2026-02-17', // 1 Ramadhan 1447 H
+    BACKGROUND_IMAGES: [
+        "mekkah1.jpg",
+        "mekkah2.jpg"
+    ]
+};
+
+// ==================== VARIABEL GLOBAL ====================
+let currentPrayerTimes = {};
+let bgIndex = 0;
+let countdownInterval = null;
+
+// ==================== FUNGSI UTAMA ====================
+
+// 1. JAM & TANGGAL REAL-TIME
+function updateDateTime() {
+    const now = new Date();
+    document.getElementById("jam").innerText = now.toLocaleTimeString("id-ID");
+    document.getElementById("tanggal").innerText = now.toLocaleDateString("id-ID", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
+}
+
+// 2. AMBIL TANGGAL HIJRIYAH (VERSI YANG BERHASIL)
+async function fetchHijriDate() {
+    const today = new Date().toISOString().split("T")[0];
+    
+    try {
+        // COBA API PERTAMA
+        const response = await fetch(`https://api.myquran.com/v1/hijri/${today}`);
+        const data = await response.json();
+        
+        console.log("Hijri Data:", data); // Untuk debugging
+        
+        if (data.status === true && data.data) {
+            const hijri = data.data;
+            document.getElementById("tanggal-hijriyah").innerHTML = 
+                `<i class="fas fa-star-and-crescent"></i> ${hijri.date} ${hijri.month.id} ${hijri.year} H`;
+            return;
+        }
+    } catch (error1) {
+        console.log("API 1 gagal, coba API 2...");
+    }
+    
+    try {
+        // COBA API ALTERNATIF
+        const response2 = await fetch(`https://api.aladhan.com/v1/gToH?date=${today}`);
+        const data2 = await response2.json();
+        
+        if (data2.code === 200) {
+            const hijri = data2.data.hijri;
+            document.getElementById("tanggal-hijriyah").innerHTML = 
+                `<i class="fas fa-star-and-crescent"></i> ${hijri.day} ${hijri.month.en} ${hijri.year} H`;
+            return;
+        }
+    } catch (error2) {
+        console.log("API 2 juga gagal");
+    }
+    
+    // FALLBACK: Hitung manual
+    const hijriDate = calculateHijriDate();
+    document.getElementById("tanggal-hijriyah").innerHTML = 
+        `${hijriDate}`;
+}
+
+// 3. FUNGSI HITUNG MANUAL TANGGAL HIJRIYAH (FALLBACK)
+function calculateHijriDate() {
+    const today = new Date();
+    const startHijri = new Date(2023, 6, 19); // 1 Muharram 1445 H
+    const diffDays = Math.floor((today - startHijri) / (1000 * 60 * 60 * 24));
+    
+    let hijriYear = 1445;
+    let daysInYear = 354;
+    let remainingDays = diffDays;
+    
+    while (remainingDays >= daysInYear) {
+        remainingDays -= daysInYear;
+        hijriYear++;
+        // Tahun kabisat Hijriyah (30 tahun cycle)
+        daysInYear = (hijriYear % 30 === 2 || hijriYear % 30 === 5 || hijriYear % 30 === 7 || 
+                     hijriYear % 30 === 10 || hijriYear % 30 === 13 || hijriYear % 30 === 16 || 
+                     hijriYear % 30 === 18 || hijriYear % 30 === 21 || hijriYear % 30 === 24 || 
+                     hijriYear % 30 === 26 || hijriYear % 30 === 29) ? 355 : 354;
+    }
+    
+    const hijriMonths = [
+        "Muharram", "Safar", "Rabiul Awal", "Rabiul Akhir",
+        "Jumadil Awal", "Jumadil Akhir", "Rajab", "Sya'ban",
+        "Ramadhan", "Syawal", "Dzulqaidah", "Dzulhijjah"
+    ];
+    
+    const monthDays = [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29]; // Tahun biasa
+    if (daysInYear === 355) monthDays[11] = 30; // Dzulhijjah 30 hari di tahun kabisat
+    
+    let monthIndex = 0;
+    while (remainingDays >= monthDays[monthIndex]) {
+        remainingDays -= monthDays[monthIndex];
+        monthIndex++;
+    }
+    
+    const hijriDay = remainingDays + 1;
+    const hijriMonth = hijriMonths[monthIndex];
+    
+    return `${hijriDay} ${hijriMonth} ${hijriYear} H`;
+}
+
+// 4. AMBIL JADWAL SHOLAT
+async function fetchPrayerTimes() {
+    const today = new Date().toISOString().split("T")[0];
+    
+    try {
+        const response = await fetch(`https://api.myquran.com/v2/sholat/jadwal/${CONFIG.LOCATION_ID}/${today}`);
+        const data = await response.json();
+        
+        if (data.status && data.data) {
+            currentPrayerTimes = data.data.jadwal;
+            
+            // Update tampilan waktu sholat
+            document.getElementById("subuh").innerText = currentPrayerTimes.subuh;
+            document.getElementById("syuruq").innerText = currentPrayerTimes.terbit;
+            document.getElementById("dzuhur").innerText = currentPrayerTimes.dzuhur;
+            document.getElementById("asar").innerText = currentPrayerTimes.ashar;
+            document.getElementById("maghrib").innerText = currentPrayerTimes.maghrib;
+            document.getElementById("isya").innerText = currentPrayerTimes.isya;
+            
+            // Mulai countdown
+            startCountdown(currentPrayerTimes);
+            
+            console.log("Jadwal sholat berhasil diambil:", currentPrayerTimes);
+            return true;
+        }
+    } catch (error) {
+        console.error("Error mengambil jadwal sholat:", error);
+        
+        // FALLBACK: Waktu default untuk Jonggol
+        const defaultTimes = {
+            subuh: "04:30",
+            terbit: "05:45",
+            dzuhur: "12:00",
+            ashar: "15:15",
+            maghrib: "18:00",
+            isya: "19:15"
+        };
+        
+        document.getElementById("subuh").innerText = defaultTimes.subuh;
+        document.getElementById("syuruq").innerText = defaultTimes.terbit;
+        document.getElementById("dzuhur").innerText = defaultTimes.dzuhur;
+        document.getElementById("asar").innerText = defaultTimes.ashar;
+        document.getElementById("maghrib").innerText = defaultTimes.maghrib;
+        document.getElementById("isya").innerText = defaultTimes.isya;
+        
+        startCountdown(defaultTimes);
+        return false;
+    }
+}
+
+// 5. COUNTDOWN SHOLAT TERDEKAT (VERSI OPTIMIZED)
+function startCountdown(jadwal) {
+    // Hentikan interval sebelumnya jika ada
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+    }
+    
+    countdownInterval = setInterval(() => {
+        const now = new Date();
+        const currentTime = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+        
+        // Konversi waktu sholat ke detik
+        const prayerSeconds = [
+            {name:"Subuh", time:jadwal.subuh},
+            {name:"Dzuhur", time:jadwal.dzuhur},
+            {name:"Asar", time:jadwal.ashar},
+            {name:"Maghrib", time:jadwal.maghrib},
+            {name:"Isya", time:jadwal.isya}
+        ].map(p => {
+            const [hours, minutes] = p.time.split(":").map(Number);
+            return {
+                name: p.name,
+                seconds: hours * 3600 + minutes * 60,
+                originalTime: p.time
+            };
+        });
+        
+        // Cari sholat berikutnya
+        let nextPrayer = null;
+        for (let prayer of prayerSeconds) {
+            if (prayer.seconds > currentTime) {
+                nextPrayer = prayer;
+                break;
+            }
+        }
+        
+        // Jika tidak ada sholat berikutnya hari ini, gunakan Subuh besok
+        if (!nextPrayer) {
+            nextPrayer = {
+                name: "Subuh",
+                seconds: prayerSeconds[0].seconds + 24 * 3600,
+                originalTime: jadwal.subuh
+            };
+        }
+        
+        // Hitung selisih waktu
+        let diffSeconds = nextPrayer.seconds - currentTime;
+        if (diffSeconds < 0) diffSeconds += 24 * 3600;
+        
+        const hours = Math.floor(diffSeconds / 3600);
+        const minutes = Math.floor((diffSeconds % 3600) / 60);
+        const seconds = diffSeconds % 60;
+        
+        // Format tampilan countdown
+        const countdownElement = document.getElementById("countSholat");
+        countdownElement.innerHTML = 
+            `<span style="color:white; font-size:24px;">${nextPrayer.name} |</span> ` +
+            `<span style="font-family:'DSEG7 Classic', monospace; font-size:28px; margin-left:10px;">` +
+            `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}</span>`;
+        
+        // Highlight sholat berikutnya di grid
+        highlightNextPrayer(nextPrayer.name);
+        
+    }, 1000); // Update setiap detik
+}
+
+// 6. HIGHLIGHT SHOLAT BERIKUTNYA DI GRID
+function highlightNextPrayer(prayerName) {
+    // Reset semua highlight
+    const prayerCards = document.querySelectorAll('[id="subuh"], [id="syuruq"], [id="dzuhur"], [id="asar"], [id="maghrib"], [id="isya"]');
+    prayerCards.forEach(card => {
+        card.parentElement.style.border = "none";
+        card.parentElement.style.boxShadow = "none";
+    });
+    
+    // Highlight sholat berikutnya
+    const prayerMap = {
+        "Subuh": "subuh",
+        "Dzuhur": "dzuhur", 
+        "Asar": "asar",
+        "Maghrib": "maghrib",
+        "Isya": "isya"
+    };
+    
+    if (prayerMap[prayerName]) {
+        const nextPrayerElement = document.getElementById(prayerMap[prayerName]);
+        if (nextPrayerElement && nextPrayerElement.parentElement) {
+            nextPrayerElement.parentElement.style.border = "2px solid #FF7A00";
+            nextPrayerElement.parentElement.style.boxShadow = "0 0 15px rgba(255, 122, 0, 0.5)";
+        }
+    }
+}
+
+// 7. COUNTDOWN RAMADHAN YANG DIPERBAIKI
+function updateRamadhanCountdown() {
+    const ramadhanDate = new Date(CONFIG.RAMADHAN_DATE);
+    const now = new Date();
+    
+    // Jika Ramadhan sudah lewat, hitung untuk tahun depan
+    if (now > ramadhanDate) {
+        // Tambahkan 354 hari (1 tahun Hijriyah)
+        ramadhanDate.setFullYear(ramadhanDate.getFullYear() + 1);
+    }
+    
+    const diffTime = ramadhanDate - now;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    // Format tanggal Ramadhan
+    const ramadhanFormatted = ramadhanDate.toLocaleDateString('id-ID', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
+    
+    // Update tampilan
+    const ramadhanElement = document.getElementById("ramadhan");
+    ramadhanElement.innerHTML = 
+        `<strong>${diffDays} Hari</strong> Menuju Bulan Suci Ramadhan<br>`;
+    
+    return diffDays;
+}
+
+// 8. BACKGROUND SLIDER
+function initBackgroundSlider() {
+    // Preload images
+    CONFIG.BACKGROUND_IMAGES.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+    
+    // Tampilkan gambar pertama
+    document.body.style.backgroundImage = `url('${CONFIG.BACKGROUND_IMAGES[0]}')`;
+    
+    // Ganti otomatis
+    setInterval(() => {
+        bgIndex = (bgIndex + 1) % CONFIG.BACKGROUND_IMAGES.length;
+        document.body.style.backgroundImage = `url('${CONFIG.BACKGROUND_IMAGES[bgIndex]}')`;
+        document.body.style.transition = "background-image 1.5s ease-in-out";
+    }, 8000);
+}
+
+// ==================== INISIALISASI ====================
+document.addEventListener("DOMContentLoaded", async function() {
+    console.log("Aplikasi Jadwal Sholat Dimulai...");
+    
+    // 1. Mulai jam & tanggal
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+    
+    // 2. Inisialisasi background slider
+    initBackgroundSlider();
+    
+    // 3. Ambil tanggal Hijriyah
+    await fetchHijriDate();
+    
+    // 4. Ambil jadwal sholat
+    await fetchPrayerTimes();
+    
+    // 5. Mulai countdown Ramadhan
+    updateRamadhanCountdown();
+    setInterval(updateRamadhanCountdown, 60000); // Update setiap menit
+    
+    // 6. Refresh data setiap 30 menit
+    setInterval(async () => {
+        console.log("Refreshing data...");
+        await fetchHijriDate();
+        await fetchPrayerTimes();
+    }, 1800000); // 30 menit
+    
+    console.log("Aplikasi siap digunakan!");
+});
+
+// ==================== ERROR HANDLING ====================
+window.addEventListener('error', function(e) {
+    console.error("Terjadi error:", e.error);
+    
+    // Tampilkan pesan error user-friendly
+    const errorMsg = "Terjadi kesalahan teknis. Silakan refresh halaman.";
+    if (!document.getElementById("error-message")) {
+        const errorDiv = document.createElement("div");
+        errorDiv.id = "error-message";
+        errorDiv.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff4444;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 9999;
+            display: none;
+        `;
+        errorDiv.textContent = errorMsg;
+        document.body.appendChild(errorDiv);
+        
+        setTimeout(() => {
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }, 100);
+    }
+});
+
+// ==================== FUNGSI TAMBAHAN ====================
+// Untuk debugging di console
+window.showPrayerTimes = function() {
+    console.log("Waktu Sholat Saat Ini:", currentPrayerTimes);
+    return currentPrayerTimes;
+};
+
+// Cek koneksi internet
+window.addEventListener('online', function() {
+    console.log("Koneksi internet tersedia, refresh data...");
+    fetchHijriDate();
+    fetchPrayerTimes();
+});
+
+window.addEventListener('offline', function() {
+    console.log("Tidak ada koneksi internet");
+    document.getElementById("tanggal-hijriyah").innerHTML += " (Offline)";
+});
+</script>
+
+</body>
+</html>
